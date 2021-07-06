@@ -23,7 +23,7 @@ RUN $(Get-Content -Path configValue) -replace '\\', '' > configValue_update
 RUN $(Get-Content -Path configValue_update) -replace '\"{', '{' > configValue_update2
 RUN $(Get-Content -Path configValue_update2) -replace '}\"', '}' > configValue_update3
 # trigger container validation.
-RUN Invoke-RestMethod -Method POST -Uri "https://onepubng-prod.azure-api.net/MediaRefreshServiceFabric/ServerContainerSFSvc/ServerContainerValidation/ValidateContainerInfo" -Headers @{Authorization=$(Get-Content -Path authToken); runTimeBuildVersion=$(Get-Content -Path realRunTimeVersion); runTimeUbr=$(Get-Content -Path realRunTime); product='Windows 10 20H2';  hostUrl='onepubacrprod.azurecr.io/internal/private';tag='20H2';release='2021.07 OOB';release='2021.07 OOB'} -Body $(Get-Content -Path configValue_update3) -ContentType "application/json" -UseBasicParsing
+RUN Invoke-RestMethod -Method POST -Uri "https://onepubng-prod.azure-api.net/MediaRefreshServiceFabric/ServerContainerSFSvc/ServerContainerValidation/ValidateContainerInfo" -Headers @{Authorization=$(Get-Content -Path authToken); runTimeBuildVersion=$(Get-Content -Path realRunTimeVersion); runTimeUbr=$(Get-Content -Path realRunTime); product='Windows 10 20H2';  hostUrl='onepubacrprod.azurecr.io/internal/private';tag='20H2';release='2021.07 B';release='2021.07 B'} -Body $(Get-Content -Path configValue_update3) -ContentType "application/json" -UseBasicParsing
 
 FROM onepubacrprod.azurecr.io/internal/private/windows/servercore:20H2-amd64
 ARG CERT
@@ -50,4 +50,4 @@ RUN $(Get-Content -Path configValue) -replace '\\', '' > configValue_update
 RUN $(Get-Content -Path configValue_update) -replace '\"{', '{' > configValue_update2
 RUN $(Get-Content -Path configValue_update2) -replace '}\"', '}' > configValue_update3
 # trigger container validation.
-RUN Invoke-RestMethod -Method POST -Uri "https://onepubng-prod.azure-api.net/MediaRefreshServiceFabric/ServerContainerSFSvc/ServerContainerValidation/ValidateContainerInfo" -Headers @{Authorization=$(Get-Content -Path authToken); runTimeBuildVersion=$(Get-Content -Path realRunTimeVersion); runTimeUbr=$(Get-Content -Path realRunTime); product='Windows 10 20H2';  hostUrl='onepubacrprod.azurecr.io/internal/private';tag='20H2-amd64';release='2021.07 OOB';release='2021.07 OOB'} -Body $(Get-Content -Path configValue_update3) -ContentType "application/json" -UseBasicParsing 
+RUN Invoke-RestMethod -Method POST -Uri "https://onepubng-prod.azure-api.net/MediaRefreshServiceFabric/ServerContainerSFSvc/ServerContainerValidation/ValidateContainerInfo" -Headers @{Authorization=$(Get-Content -Path authToken); runTimeBuildVersion=$(Get-Content -Path realRunTimeVersion); runTimeUbr=$(Get-Content -Path realRunTime); product='Windows 10 20H2';  hostUrl='onepubacrprod.azurecr.io/internal/private';tag='20H2-amd64';release='2021.07 B';release='2021.07 B'} -Body $(Get-Content -Path configValue_update3) -ContentType "application/json" -UseBasicParsing 
